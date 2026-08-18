@@ -1,0 +1,40 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "marze-agahi",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2024-09-23",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "marzeagahi-d1-prod",
+      "database_id": "YOUR_D1_DATABASE_ID"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "PUBLIC_BUCKET",
+      "bucket_name": "marzeagahi-public"
+    },
+    {
+      "binding": "PRIVATE_BUCKET",
+      "bucket_name": "marzeagahi-private"
+    },
+    {
+      "binding": "QUARANTINE_BUCKET",
+      "bucket_name": "marzeagahi-quarantine"
+    }
+  ],
+  "vars": {
+    "SITE_URL": "https://neadrdeath.ir",
+    "DEFAULT_LOCALE": "fa",
+    "EMAIL_PROVIDER": "none",
+    "ANALYTICS_ENABLED": "false"
+  }
+}
