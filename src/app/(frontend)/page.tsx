@@ -5,47 +5,11 @@ import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { Alert } from '@/components/ui/Alert'
 import { ExperienceCard } from '@/features/experiences/ExperienceCard'
-import { BookOpen, Compass, ShieldCheck, FileEdit, ArrowLeft, CheckCircle2, Sparkles, HelpCircle } from 'lucide-react'
+import { getFeaturedExperiences } from '@/data/experiences'
+import { BookOpen, Compass, ShieldCheck, FileEdit, ArrowLeft, CheckCircle2, Sparkles } from 'lucide-react'
 
 export default function HomePage() {
-  const sampleFeaturedExperiences = [
-    {
-      publicId: 'exp-feat-1',
-      title: 'ادراک آرامش عمیق و مشاهده اتاق عمل از دید بالا در حین جراحی قلب',
-      slug: 'deep-peace-out-of-body-surgery',
-      editorialSummary:
-        'روایتی مستند از احساس ناگهانی انقطاع درد، ادراک نقطه دیدی معلق در سقف اتاق عمل و توصیف دقیق وسایل و مکالمات کادر جراحی.',
-      experienceTypeTitle: 'تجربه نزدیک به مرگ',
-      anonymityLevel: 'alias' as const,
-      publicAlias: 'م. سهرابی',
-      patterns: [
-        { title: 'احساس خروج از بدن', slug: 'out-of-body-sensation' },
-        { title: 'احساس آرامش و وحدت', slug: 'deep-peace-and-unity' },
-      ],
-      documentationMethods: ['structuredInterview'],
-      occurrenceYear: '۱۳۹۶',
-      hasAudio: true,
-      publishedAt: '۱۴۰۴/۰۳/۱۵',
-    },
-    {
-      publicId: 'exp-feat-2',
-      title: 'گذر از گذرگاه تاریک، مواجهه با حضور درخشان و بازبینی پانورامیک وقایع',
-      slug: 'tunnel-light-life-review',
-      editorialSummary:
-        'گزارش رویدادی در پی ایست قلبی کوتاه‌مدت که با تجربه حرکت در دالانی تاریک و درک حضور نوری پر از شعور و مرور ادراکات همراه بوده است.',
-      experienceTypeTitle: 'تجربه نزدیک به مرگ',
-      anonymityLevel: 'anonymous' as const,
-      patterns: [
-        { title: 'گذر از تاریکی یا تونل', slug: 'tunnel-or-passage' },
-        { title: 'مواجهه با نور', slug: 'radiant-light-or-presence' },
-        { title: 'مرور زندگی', slug: 'life-review' },
-      ],
-      documentationMethods: ['selfReport'],
-      occurrenceYear: '۱۴۰۰',
-      hasVideo: false,
-      publishedAt: '۱۴۰۴/۰۶/۲۰',
-    },
-  ]
+  const featuredExperiences = getFeaturedExperiences()
 
   const corePatterns = [
     {
@@ -112,8 +76,8 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h2 className="text-2xl font-bold text-text-primary">روایت‌های منتخب آرشیو</h2>
-            <p className="text-sm text-text-secondary">نمونه‌هایی از مستندات ثبت‌شده همراه با روش‌های بررسی شواهد</p>
+            <h2 className="text-2xl font-bold text-text-primary">روایت‌های منتخب و شاخص آرشیو</h2>
+            <p className="text-sm text-text-secondary">نمونه‌هایی از مستندات ثبت‌شده همراه با فایل صوتی، رونوشت همگام و شواهد بررسی‌شده</p>
           </div>
           <Link href="/experiences" className="text-sm font-semibold text-primary hover:underline flex items-center gap-1">
             <span>مشاهده همه تجارب</span>
@@ -122,8 +86,24 @@ export default function HomePage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {sampleFeaturedExperiences.map((exp) => (
-            <ExperienceCard key={exp.publicId} {...exp} />
+          {featuredExperiences.map((exp) => (
+            <ExperienceCard
+              key={exp.publicId}
+              publicId={exp.publicId}
+              title={exp.title}
+              slug={exp.slug}
+              editorialSummary={exp.editorialSummary}
+              experienceTypeTitle={exp.experienceTypeTitle}
+              anonymityLevel={exp.anonymityLevel}
+              publicAlias={exp.publicAlias}
+              patterns={exp.patterns}
+              documentationMethods={exp.documentationMethods}
+              occurrenceYear={exp.occurrenceYear}
+              country={exp.country}
+              hasAudio={Boolean(exp.media && exp.media.type === 'audio')}
+              hasVideo={Boolean(exp.media && exp.media.type === 'video')}
+              publishedAt={exp.publishedAt}
+            />
           ))}
         </div>
       </section>
@@ -171,7 +151,7 @@ export default function HomePage() {
             <h3 className="text-base font-bold text-text-primary">حریم خصوصی و ناشناس‌سازی</h3>
             <p className="text-xs text-text-secondary leading-persian">
               اطلاعات تماس با استاندارد نظامی AES-256-GCM رمزگذاری می‌شوند. نام واقعی و مکان‌های حساس پیش از انتشار به
-              طور کامل حذف می‌گردند.
+              طور کامل حذف می‌گردند (مگر در موارد رضایت صریح راوی).
             </p>
           </Card>
 

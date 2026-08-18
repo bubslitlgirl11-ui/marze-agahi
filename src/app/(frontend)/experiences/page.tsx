@@ -4,18 +4,20 @@ import { FilterBar } from '@/features/experiences/FilterBar'
 import { ExperienceCard } from '@/features/experiences/ExperienceCard'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { Breadcrumb } from '@/components/ui/Alert'
+import { getAllExperiences } from '@/data/experiences'
 
 export const metadata: Metadata = {
-  title: 'آرشیو تجربه‌ها',
-  description: 'فهرست و آرشیو مستندسازی‌شده تجربه‌های نزدیک به مرگ و رویدادهای مرزی آگاهی.',
+  title: 'آرشیو مستندسازی تجربه‌ها | مرز آگاهی',
+  description: 'فهرست و آرشیو مستندسازی‌شده تجربه‌های نزدیک به مرگ و رویدادهای مرزی آگاهی همراه با فایل صوتی، متن همگام و بررسی شواهد.',
 }
 
 export default async function ExperiencesDirectoryPage(props: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const searchParams = await props.searchParams
-  const query = typeof searchParams.q === 'string' ? searchParams.q : ''
-  const typeFilter = typeof searchParams.type === 'string' ? searchParams.type : ''
+  const query = typeof searchParams.q === 'string' ? searchParams.q.trim() : ''
+  const typeFilter = typeof searchParams.type === 'string' ? searchParams.type.trim() : ''
+  const patternFilter = typeof searchParams.pattern === 'string' ? searchParams.pattern.trim() : ''
 
   const experienceTypes = [
     { label: 'تجربه نزدیک به مرگ', value: 'near-death-experience' },
@@ -34,68 +36,23 @@ export default async function ExperiencesDirectoryPage(props: {
     { label: 'آرامش و وحدت', value: 'deep-peace-and-unity' },
   ]
 
-  const experiences = [
-    {
-      publicId: 'exp-1',
-      title: 'ادراک آرامش عمیق و مشاهده اتاق عمل از دید بالا در حین جراحی قلب',
-      slug: 'deep-peace-out-of-body-surgery',
-      editorialSummary:
-        'روایتی مستند از احساس ناگهانی انقطاع درد، ادراک نقطه دیدی معلق در سقف اتاق عمل و توصیف دقیق وسایل و مکالمات کادر جراحی.',
-      experienceTypeTitle: 'تجربه نزدیک به مرگ',
-      anonymityLevel: 'alias' as const,
-      publicAlias: 'م. سهرابی',
-      patterns: [
-        { title: 'احساس خروج از بدن', slug: 'out-of-body-sensation' },
-        { title: 'احساس آرامش و وحدت', slug: 'deep-peace-and-unity' },
-      ],
-      documentationMethods: ['structuredInterview'],
-      occurrenceYear: '۱۳۹۶',
-      hasAudio: true,
-      publishedAt: '۱۴۰۴/۰۳/۱۵',
-    },
-    {
-      publicId: 'exp-2',
-      title: 'گذر از گذرگاه تاریک، مواجهه با حضور درخشان و بازبینی پانورامیک وقایع',
-      slug: 'tunnel-light-life-review',
-      editorialSummary:
-        'گزارش رویدادی در پی ایست قلبی کوتاه‌مدت که با تجربه حرکت در دالانی تاریک و درک حضور نوری پر از شعور و مرور ادراکات همراه بوده است.',
-      experienceTypeTitle: 'تجربه نزدیک به مرگ',
-      anonymityLevel: 'anonymous' as const,
-      patterns: [
-        { title: 'گذر از تاریکی یا تونل', slug: 'tunnel-or-passage' },
-        { title: 'مواجهه با نور', slug: 'radiant-light-or-presence' },
-        { title: 'مرور زندگی', slug: 'life-review' },
-      ],
-      documentationMethods: ['selfReport'],
-      occurrenceYear: '۱۴۰۰',
-      hasVideo: false,
-      publishedAt: '۱۴۰۴/۰۶/۲۰',
-    },
-    {
-      publicId: 'exp-3',
-      title: 'ملاقات با بستگان درگذشته و مواجهه با مرز غیرقابل بازگشت در جریان بیهوشی',
-      slug: 'meeting-relatives-border-point',
-      editorialSummary:
-        'مشاهده بستگان نزدیک درگذشته در فضایی نامتعارف و آگاهی از وجود مرزی شفاف که بازگشت از آن به تصمیم راوی وابسته بوده است.',
-      experienceTypeTitle: 'تجربه نزدیک به مرگ',
-      anonymityLevel: 'alias' as const,
-      publicAlias: 'ف. رضوی',
-      patterns: [
-        { title: 'ملاقات با درگذشتگان', slug: 'meeting-deceased-or-guides' },
-        { title: 'مرز بدون بازگشت', slug: 'border-or-point-of-no-return' },
-      ],
-      documentationMethods: ['recordsReviewed'],
-      occurrenceYear: '۱۳۹۴',
-      hasVideo: true,
-      publishedAt: '۱۴۰۴/۰۸/۱۰',
-    },
-  ]
+  const allExperiences = getAllExperiences()
 
-  // Filter experiences based on query if provided
-  const filteredExperiences = experiences.filter((exp) => {
-    if (query && !exp.title.includes(query) && !exp.editorialSummary.includes(query)) {
-      return false
+  // Filter experiences based on query, type and pattern
+  const filteredExperiences = allExperiences.filter((exp) => {
+    if (query) {
+      const matchTitle = exp.title.toLowerCase().includes(query.toLowerCase())
+      const matchSummary = exp.editorialSummary.toLowerCase().includes(query.toLowerCase())
+      const matchAlias = exp.publicAlias.toLowerCase().includes(query.toLowerCase())
+      const matchNarrative = exp.narrativeParagraphs.some((p) => p.toLowerCase().includes(query.toLowerCase()))
+      if (!matchTitle && !matchSummary && !matchAlias && !matchNarrative) return false
     }
+
+    if (patternFilter) {
+      const hasPattern = exp.patterns.some((p) => p.slug === patternFilter)
+      if (!hasPattern) return false
+    }
+
     return true
   })
 
@@ -125,7 +82,23 @@ export default async function ExperiencesDirectoryPage(props: {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredExperiences.map((exp) => (
-            <ExperienceCard key={exp.publicId} {...exp} />
+            <ExperienceCard
+              key={exp.publicId}
+              publicId={exp.publicId}
+              title={exp.title}
+              slug={exp.slug}
+              editorialSummary={exp.editorialSummary}
+              experienceTypeTitle={exp.experienceTypeTitle}
+              anonymityLevel={exp.anonymityLevel}
+              publicAlias={exp.publicAlias}
+              patterns={exp.patterns}
+              documentationMethods={exp.documentationMethods}
+              occurrenceYear={exp.occurrenceYear}
+              country={exp.country}
+              hasAudio={Boolean(exp.media && exp.media.type === 'audio')}
+              hasVideo={Boolean(exp.media && exp.media.type === 'video')}
+              publishedAt={exp.publishedAt}
+            />
           ))}
         </div>
       )}

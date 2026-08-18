@@ -5,8 +5,7 @@ import { Breadcrumb, Alert } from '@/components/ui/Alert'
 import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { ExperienceCard } from '@/features/experiences/ExperienceCard'
-import { BookOpen, Info, CheckCircle, XCircle } from 'lucide-react'
-import { toPersianDigits } from '@/lib/text/persian'
+import { CheckCircle, XCircle } from 'lucide-react'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -25,20 +24,22 @@ export default async function PatternDetailPage({ params }: Props) {
   const decodedSlug = decodeURIComponent(slug)
 
   const patternData = {
-    title: 'احساس خروج از کالبد فیزیکی (Out-of-Body Experience)',
+    title: 'احساس وحدت، عشق نامشروط و آرامش عمیق',
     slug: decodedSlug,
-    category: 'coreElement',
+    category: 'transcendental',
+    categoryTitle: 'ادراکات متعالی',
+    image: '/images/patterns/pattern_peace_unity_1787053635840.jpg',
     definition:
-      'وضعیتی که در آن شخص ادراک می‌کند آگاهی و نقطه دید او از بدن فیزیکی‌اش جدا شده و محیط پیرامون را از مکانی بیرونی (معمولاً معلق در ارتفاع) مشاهده می‌کند.',
+      'وضعیتی که در آن شخص ادراک می‌کند تمامی موانع جدایی و کثرت از میان رفته و خود را در محاصره و پیوند با عشقی نامشروط، آرامشی ژرف و شعوری کیهانی بازمی‌یابد که هیچ ترس یا رنجی در آن راه ندارد.',
     inclusionCriteria: [
-      'گزارش صریح فرد مبنی بر مشاهده بدن فیزیکی خود از دیدگاه ناظر بیرونی.',
-      'احساس شفافیت حسی و توانایی ادراک جزئیات محیطی در وضعیت جدایی.',
+      'گزارش صریح احساس رهایی کامل از درد، رنج و اضطراب جسمانی.',
+      'ادراک حضور پیونددهنده محبت تام و نامشروط نسبت به کل کائنات و موجودات.',
     ],
     exclusionCriteria: [
-      'احساس سنگینی یا فلج خواب معمولی (Sleep Paralysis) بدون ادراک خروج.',
-      'توهمات بینایی ناشی از دوزهای بالای دارو که پیوستگی مکانی ندارند.',
+      'احساس آرامش موقت پس از مصرف مسکن‌های دارویی معمولی بدون درک یگانگی آگاهی.',
+      'خواب‌آلودگی ناشی از خستگی شدید بدون مؤلفه‌های شناختی وحدت وجود.',
     ],
-    sampleCountText: 'در ۱۲ مورد از مجموع ۱۸ تجربه ثبت‌شده در مجموعه منتشرشده این سایت',
+    sampleCountText: 'در ۱۵ مورد از مجموع ۱۸ تجربه ثبت‌شده در مجموعه منتشرشده این سایت',
     biasLimitationNote:
       'تعداد موارد فوق صرفاً بازتاب نمونه‌های ورودی و داوری‌شده در این پایگاه است و نباید به عنوان برآورد آماری از شیوع در کل جامعه انسانی تفسیر شود (سوگیری انتخاب خودخواسته).',
     relatedExperiences: [
@@ -51,7 +52,7 @@ export default async function PatternDetailPage({ params }: Props) {
         experienceTypeTitle: 'تجربه نزدیک به مرگ',
         anonymityLevel: 'alias' as const,
         publicAlias: 'م. سهرابی',
-        patterns: [{ title: 'احساس خروج از بدن', slug: 'out-of-body-sensation' }],
+        patterns: [{ title: 'احساس وحدت و آرامش', slug: 'deep-peace-and-unity' }],
         documentationMethods: ['structuredInterview'],
         occurrenceYear: '۱۳۹۶',
         hasAudio: true,
@@ -70,10 +71,19 @@ export default async function PatternDetailPage({ params }: Props) {
         ]}
       />
 
+      {/* Main Banner Image */}
+      <div className="rounded-2xl overflow-hidden border border-border shadow-sm aspect-video max-h-[360px] w-full bg-surface">
+        <img
+          src={patternData.image}
+          alt={patternData.title}
+          className="w-full h-full object-cover"
+        />
+      </div>
+
       {/* Title Header */}
       <div className="space-y-3">
         <Badge variant="primary" className="text-xs">
-          عنصر ادراکی اصلی
+          {patternData.categoryTitle}
         </Badge>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-text-primary">{patternData.title}</h1>
         <p className="text-sm text-text-secondary leading-persian max-w-3xl">{patternData.definition}</p>
