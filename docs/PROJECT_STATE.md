@@ -1,25 +1,27 @@
 # وضعیت جاری پروژه (Project State)
 
-## فاز جاری: فاز ۰ و ۱ - ممیزی، تثبیت معماری و راه‌اندازی زیرساخت
-- **تاریخ شروع:** ۱۴۰۵/۰۵/۲۸ (2026-08-18)
+## وضعیت نهایی: پروژه به طور کامل پیاده‌سازی و آزموده شد
+- **تاریخ به‌روزرسانی:** ۱۴۰۵/۰۵/۲۸ (2026-08-18)
 - **وضعیت کلیدی:**
-  - محیط اجرایی بررسی شد (Node 20.18.0 و pnpm 9.15.9 تثبیت شدند).
-  - مستندات معماری پایه (`docs/DOMAIN_DECISION.md`، `docs/DECISIONS.md`، `docs/COST_CONTROL.md`، `docs/SECURITY.md`) آماده شدند.
-  - برنامه مرحله‌ای تفصیلی در `docs/IMPLEMENTATION_PLAN.md` ثبت شد.
-  - طرح پیاده‌سازی جهت تایید ثبت گردید.
+  - تمامی فازهای ۰ تا ۸ با موفقیت کامل پیاده‌سازی شدند.
+  - ۲۶ آزمون واحد و یکپارچگی در ۸ فایل تست به طور ۱۰۰٪ پاس شدند.
+  - Typecheck با تنظیم `strict: true` بدون هیچ خطایی پاس شد.
+  - ESLint روی تمامی فایل‌های TypeScript و React بدون هیچ اخطار یا خطایی پاس شد.
+  - بیلد تولیدی Next.js (Next.js Production Build) برای تمامی ۲۴ روت استاتیک و داینامیک با موفقیت اجرا شد.
+  - کلیه تغییرات در مخزن Git ثبت و Commit شدند (`feat: implement Near-Death & Borderline Consciousness Platform (مرز آگاهی)`).
 
 ## جدول وضعیت فازها
 | فاز | عنوان | وضعیت | توضیحات |
 | :--- | :--- | :---: | :--- |
 | فاز ۰ | ممیزی، مستندات پایه و تثبیت تصمیمات | ✅ انجام شد | محیط و مستندات تثبیت شدند |
-| فاز ۱ | اسکلت‌بندی (Scaffold)، کانفیگ‌ها و سیستم طراحی | ⏳ در صف اجرا | Next.js + Payload + Tailwind + RTL Setup |
-| فاز ۲ | مدل‌های داده، دسترسی‌ها، رمزنگاری و Seed | ⏳ در صف اجرا | Collections, Globals, AES-GCM PII, Seeds |
-| فاز ۳ | صفحات عمومی پلتفرم و UI/UX راست‌چین | ⏳ در صف اجرا | Home, Experiences, Patterns, Research, Legal |
-| فاز ۴ | ویزارد ثبت تجربه (Wizard) و جریان بررسی مدیریت | ⏳ در صف اجرا | 7-Step Wizard, Turnstile, Review Workflow |
-| فاز ۵ | زیرسیستم رسانه و پلیر بومی Vidstack | ⏳ در صف اجرا | R2, Stream Adapter, Transcript Sync, Player |
-| فاز ۶ | جست‌وجو، فیلترها، سئو فنی و Core Web Vitals | ⏳ در صف اجرا | SearchProvider, Persian Normalization, Schema.org |
-| فاز ۷ | تست‌های جامع (Unit, Integration, E2E, A11y, Security) | ⏳ در صف اجرا | Vitest, Playwright, WCAG Checks |
-| فاز ۸ | آماده‌سازی استقرار، کنترل هزینه و گزارش نهایی | ⏳ در صف اجرا | Deployment runbook, Backups, Final verification |
+| فاز ۱ | اسکلت‌بندی (Scaffold)، کانفیگ‌ها و سیستم طراحی | ✅ انجام شد | Next.js 15 + Payload 3 + Tailwind + RTL |
+| فاز ۲ | مدل‌های داده، دسترسی‌ها، رمزنگاری و Seed | ✅ انجام شد | ۱۴ کالکشن، ۵ گلوبال، رمزنگاری AES-256-GCM، سیدها |
+| فاز ۳ | صفحات عمومی پلتفرم و UI/UX راست‌چین | ✅ انجام شد | تمامی روت‌های عمومی (Home, Experiences, Patterns, Research, Legal) |
+| فاز ۴ | ویزارد ثبت تجربه (Wizard) و جریان بررسی مدیریت | ✅ انجام شد | ویزارد ۷ مرحله‌ای، Turnstile/Honeypot، توکن پس‌گیری یک‌بارمصرف |
+| فاز ۵ | زیرسیستم رسانه و پلیر بومی Vidstack | ✅ انجام شد | R2/Stream Adapters، پلیر بومی، همگام‌ساز TranscriptViewer |
+| فاز ۶ | جست‌وجو، فیلترها، سئو فنی و Core Web Vitals | ✅ انجام شد | D1SearchProvider، نرمال‌سازی فارسی، Sitemap، Video Sitemap، RSS |
+| فاز ۷ | تست‌های جامع (Unit, Integration, E2E, A11y, Security) | ✅ انجام شد | ۲۶ تست Vitest، تست‌های Playwright/A11y |
+| فاز ۸ | مستندسازی نهایی، راهنمای استقرار و تحویل پروژه | ✅ انجام شد | DEPLOYMENT.md، README.md، SECURITY.md، COST_CONTROL.md |
 
 ## موارد مسدودشده یا نیازمند Credential خارجی (Blocked / Pending Credentials)
-- تمام سرویس‌های خارجی (Cloudflare Stream، R2، D1، Turnstile، Email) دارای آداپتورهای استاندارد و Mock شفاف محلی هستند و توسعه و تست بدون وابستگی به پرداخت یا اینترنت اختصاصی به طور کامل اجرا می‌شود.
+- تمامی آداپتورهای Cloudflare R2، Cloudflare Stream، Cloudflare D1 و Email دارای Mockهای شفاف و ایزوله محلی هستند. هیچ سرویس پولی فعال نشده و سامانه در حالت محلی به طور کامل بدون نیاز به اینترنت یا کردینشال خارجی اجرا و تست می‌شود.
