@@ -2,8 +2,9 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { Menu, X, Search, FileEdit, BookOpen, Compass, Shield } from 'lucide-react'
+import { Menu, X, Search, FileEdit, BookOpen, Compass, Shield, Globe } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import { Logo } from '@/components/ui/Logo'
 
 export interface HeaderProps {
   siteName?: string
@@ -16,23 +17,22 @@ export const Header: React.FC<HeaderProps> = ({ siteName = 'مرز آگاهی' }
     { label: 'آرشیو تجربه‌ها', href: '/experiences', icon: Compass },
     { label: 'اطلس الگوها', href: '/patterns', icon: BookOpen },
     { label: 'پژوهش و مقالات', href: '/research', icon: BookOpen },
+    { label: 'مراکز و پیوندها', href: '/links', icon: Globe },
     { label: 'روششناسی بررسی', href: '/methodology', icon: Shield },
     { label: 'منشور اخلاقی', href: '/ethics', icon: Shield },
   ]
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-surface/90 backdrop-blur-md border-b border-border/80 transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <header className="sticky top-0 z-40 w-full bg-surface/95 backdrop-blur-md border-b border-border/80 transition-all shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Brand / Logo */}
-        <div className="flex items-center gap-6">
-          <Link href="/" className="flex items-center gap-2.5 focus:outline-none focus:ring-2 focus:ring-primary rounded-lg p-1">
-            <div className="w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-lg shadow-sm">
-              م
-            </div>
-            <div className="text-right">
-              <span className="text-base font-bold text-text-primary block leading-tight">{siteName}</span>
-              <span className="text-[10px] text-text-secondary block">آرشیو پژوهشی تجارب مرزی</span>
-            </div>
+        <div className="flex items-center gap-8">
+          <Link
+            href="/"
+            className="flex items-center focus:outline-none focus:ring-2 focus:ring-primary rounded-xl p-1 transition-transform hover:opacity-95"
+            aria-label={`${siteName} - صفحه اصلی`}
+          >
+            <Logo size="lg" variant="full" />
           </Link>
 
           {/* Desktop Navigation */}

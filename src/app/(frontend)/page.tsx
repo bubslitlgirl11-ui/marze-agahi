@@ -6,10 +6,13 @@ import { Badge } from '@/components/ui/Badge'
 import { Alert } from '@/components/ui/Alert'
 import { ExperienceCard } from '@/features/experiences/ExperienceCard'
 import { getFeaturedExperiences } from '@/data/experiences'
-import { BookOpen, Compass, ShieldCheck, FileEdit, ArrowLeft, CheckCircle2, Sparkles } from 'lucide-react'
+import { getFeaturedOrganizations } from '@/data/organizations'
+import { BookOpen, Compass, ShieldCheck, FileEdit, ArrowLeft, CheckCircle2, Sparkles, Globe, ExternalLink, Award } from 'lucide-react'
+import Image from 'next/image'
 
 export default function HomePage() {
   const featuredExperiences = getFeaturedExperiences()
+  const featuredOrganizations = getFeaturedOrganizations()
 
   const corePatterns = [
     {
@@ -138,6 +141,101 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* International Research Organizations Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <Badge variant="primary" className="py-0.5 px-2.5 text-xs font-semibold gap-1">
+                <Globe className="w-3.5 h-3.5" />
+                <span>شبکه جهانی پژوهش آگاهی</span>
+              </Badge>
+            </div>
+            <h2 className="text-2xl font-bold text-text-primary">
+              انجمن‌ها و مراکز پیشرو تحقیقات NDE در جهان
+            </h2>
+            <p className="text-sm text-text-secondary">
+              معرفی معتبرترین نهادهای علمی در آمریکا، آلمان، بریتانیا و اروپا همراه با معرفی بنیانگذاران و مراجع رسمی
+            </p>
+          </div>
+          <Link href="/links" className="text-sm font-semibold text-primary hover:underline flex items-center gap-1">
+            <span>مشاهده همه مراکز و پیوندها</span>
+            <ArrowLeft className="w-4 h-4" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {featuredOrganizations.map((org) => {
+            const founder = org.founders[0]
+            return (
+              <Card key={org.id} className="p-5 flex flex-col justify-between space-y-4 hover:border-primary/50 transition-all bg-surface">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-medium px-2 py-0.5 rounded bg-background border border-border/60">
+                      {org.countryFlag} {org.countryFa}
+                    </span>
+                    <span className="text-xs font-mono font-bold text-accent">
+                      {org.acronym || org.foundedYear}
+                    </span>
+                  </div>
+
+                  <div>
+                    <h3 className="text-base font-bold text-text-primary line-clamp-1">
+                      {org.nameFa}
+                    </h3>
+                    <p className="text-xs text-text-secondary line-clamp-1 font-sans dir-ltr text-left">
+                      {org.name}
+                    </p>
+                  </div>
+
+                  {founder && (
+                    <div className="flex items-center gap-3 p-2.5 rounded-lg bg-background/80 border border-border/60">
+                      <div className="relative w-12 h-12 rounded-lg overflow-hidden border border-border shrink-0 bg-surface">
+                        <Image
+                          src={founder.image}
+                          alt={founder.nameFa}
+                          fill
+                          className="object-cover"
+                          sizes="48px"
+                        />
+                      </div>
+                      <div className="min-w-0">
+                        <span className="text-xs font-bold text-text-primary block truncate">
+                          {founder.nameFa}
+                        </span>
+                        <span className="text-[11px] text-primary block truncate">
+                          {founder.roleFa}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
+                  <p className="text-xs text-text-secondary line-clamp-2 leading-relaxed">
+                    {org.summaryFa}
+                  </p>
+                </div>
+
+                <div className="pt-2 border-t border-border/60 flex items-center justify-between">
+                  <Link href="/links" className="text-xs text-primary font-medium hover:underline flex items-center gap-1">
+                    <span>اطلاعات تفصیلی</span>
+                    <ArrowLeft className="w-3 h-3" />
+                  </Link>
+                  <a
+                    href={org.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-text-secondary hover:text-text-primary flex items-center gap-1"
+                  >
+                    <span>وب‌سایت</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </Card>
+            )
+          })}
         </div>
       </section>
 

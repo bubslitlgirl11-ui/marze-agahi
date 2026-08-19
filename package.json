@@ -20,9 +20,13 @@
     "db:migrate": "payload migrate",
     "db:seed:prod": "tsx scripts/seed-prod.ts",
     "db:seed:dev": "tsx scripts/seed-dev.ts",
-    "export:public": "tsx scripts/export-public.ts"
+    "export:public": "tsx scripts/export-public.ts",
+    "cap:sync": "cap sync android",
+    "cap:build:apk": "cd android && gradlew assembleDebug && cd .."
   },
   "dependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/core": "^6.2.0",
     "@payloadcms/db-sqlite": "^3.25.0",
     "@payloadcms/next": "^3.25.0",
     "@payloadcms/richtext-lexical": "^3.25.0",
@@ -46,6 +50,8 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.1",
+    "@capacitor/cli": "^6.2.0",
+    "@opennextjs/cloudflare": "^1.20.2",
     "@playwright/test": "^1.50.1",
     "@tailwindcss/typography": "^0.5.16",
     "@testing-library/jest-dom": "^6.6.3",

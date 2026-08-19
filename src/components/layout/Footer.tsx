@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { Shield, BookOpen, HeartHandshake } from 'lucide-react'
+import { Logo } from '@/components/ui/Logo'
 
 export interface FooterProps {
   siteName?: string
@@ -17,12 +18,9 @@ export const Footer: React.FC<FooterProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
           {/* Col 1: Brand & Disclaimer */}
           <div className="md:col-span-2 space-y-3">
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-md bg-primary text-white flex items-center justify-center font-bold text-sm">
-                م
-              </div>
-              <span className="font-bold text-base text-text-primary">{siteName}</span>
-            </div>
+            <Link href="/" className="inline-block focus:outline-none focus:ring-2 focus:ring-primary rounded-lg p-0.5" aria-label={siteName}>
+              <Logo size="md" variant="compact" />
+            </Link>
             <p className="text-sm text-text-secondary leading-persian max-w-lg">{siteDescription}</p>
             <div className="p-3 bg-background rounded-lg border border-border/60 text-xs text-text-secondary leading-relaxed">
               <strong className="text-text-primary block mb-1">هشدار مهم اخلاقی و بالینی:</strong>
@@ -48,6 +46,11 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <Link href="/research" className="hover:text-primary transition-colors">
                   پژوهش‌ها و مقالات علمی
+                </Link>
+              </li>
+              <li>
+                <Link href="/links" className="hover:text-primary transition-colors">
+                  پیوندها و مراکز تحقیقاتی
                 </Link>
               </li>
               <li>

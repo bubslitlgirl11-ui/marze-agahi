@@ -1,5 +1,6 @@
-import React from 'react'
-import type { Metadata } from 'next'
+'use client'
+
+import React, { use } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Breadcrumb } from '@/components/ui/Alert'
@@ -17,23 +18,9 @@ interface Props {
   params: Promise<{ slug: string }>
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params
-  const exp = getExperienceBySlug(slug)
-  if (!exp) {
-    return {
-      title: 'تجربه یافت نشد | آرشیو تجارب',
-    }
-  }
-
-  return {
-    title: `${exp.title} | آرشیو تجارب مرز آگاهی`,
-    description: exp.editorialSummary,
-  }
-}
-
-export default async function ExperienceDetailPage({ params }: Props) {
-  const { slug } = await params
+export default function ExperienceDetailPage({ params }: Props) {
+  const unwrappedParams = use(params)
+  const slug = unwrappedParams.slug
   const expData = getExperienceBySlug(slug)
 
   if (!expData) {

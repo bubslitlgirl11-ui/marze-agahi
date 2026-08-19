@@ -1,0 +1,59 @@
+<svg width="512" height="512" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Velvety continuous micro-gradient -->
+    <linearGradient id="minimalInfinityGrad" x1="10" y1="25" x2="90" y2="75" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#1B4D4B" />
+      <stop offset="25%" stopColor="#245E5D" />
+      <stop offset="48%" stopColor="#4A8884" />
+      <stop offset="52%" stopColor="#CCA462" />
+      <stop offset="75%" stopColor="#A77D46" />
+      <stop offset="90%" stopColor="#D9B167" />
+      <stop offset="100%" stopColor="#8C632D" />
+    </linearGradient>
+
+    <!-- Crossing overlap highlight -->
+    <linearGradient id="crossingLight" x1="42" y1="38" x2="58" y2="62" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#4A8884" />
+      <stop offset="50%" stopColor="#E2BE76" />
+      <stop offset="100%" stopColor="#A77D46" />
+    </linearGradient>
+
+    <!-- Soft ambient aura -->
+    <radialGradient id="pureAura" cx="50" cy="50" r="28" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#F9F3E3" stopOpacity="0.8" />
+      <stop offset="60%" stopColor="#E8F1F0" stopOpacity="0.3" />
+      <stop offset="100%" stopColor="#E8F1F0" stopOpacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Ambient background aura -->
+  <circle cx="50" cy="50" r="30" fill="url(#pureAura)" />
+
+  <!-- Pure Mathematical Lemniscate -->
+  <path
+    d="M 50 50
+       C 42 38, 36 31, 28.5 31
+       C 18.8 31, 11 39.5, 11 50
+       C 11 60.5, 18.8 69, 28.5 69
+       C 36 69, 42 62, 50 50
+       C 58 38, 64 31, 71.5 31
+       C 81.2 31, 89 39.5, 89 50
+       C 89 60.5, 81.2 69, 71.5 69
+       C 64 69, 58 62, 50 50 Z"
+    stroke="url(#minimalInfinityGrad)"
+    strokeWidth="6"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  />
+
+  <!-- Crossing weave -->
+  <path
+    d="M 43 40.5 C 45.5 44, 47.8 47.2, 50 50 C 52.2 52.8, 54.5 56, 57 59.5"
+    stroke="url(#crossingLight)"
+    strokeWidth="6"
+    strokeLinecap="round"
+  />
+
+  <!-- Focal Point of Light -->
+  <circle cx="50" cy="50" r="2.5" fill="#FFFDF8" />
+</svg>

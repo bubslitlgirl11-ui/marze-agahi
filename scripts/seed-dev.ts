@@ -33,10 +33,28 @@ export async function seedDev() {
       publicNarrative: {
         root: {
           type: 'root',
+          direction: 'rtl' as const,
+          format: '' as const,
+          indent: 0,
+          version: 1,
           children: [
             {
               type: 'paragraph',
-              children: [{ text: 'این متن آزمایشی صرفاً جهت تست ظاهر و خوانایی قلم فارسی و رندر پاراگراف‌هاست.' }],
+              direction: 'rtl' as const,
+              format: '' as const,
+              indent: 0,
+              version: 1,
+              children: [
+                {
+                  type: 'text',
+                  version: 1,
+                  text: 'این متن آزمایشی صرفاً جهت تست ظاهر و خوانایی قلم فارسی و رندر پاراگراف‌هاست.',
+                  detail: 0,
+                  format: 0,
+                  mode: 'normal',
+                  style: '',
+                },
+              ],
             },
           ],
         },

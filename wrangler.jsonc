@@ -14,21 +14,7 @@
     {
       "binding": "DB",
       "database_name": "marzeagahi-d1-prod",
-      "database_id": "YOUR_D1_DATABASE_ID"
-    }
-  ],
-  "r2_buckets": [
-    {
-      "binding": "PUBLIC_BUCKET",
-      "bucket_name": "marzeagahi-public"
-    },
-    {
-      "binding": "PRIVATE_BUCKET",
-      "bucket_name": "marzeagahi-private"
-    },
-    {
-      "binding": "QUARANTINE_BUCKET",
-      "bucket_name": "marzeagahi-quarantine"
+      "database_id": "b1e8774c-80ec-4d47-aae7-5c72636074c3"
     }
   ],
   "vars": {

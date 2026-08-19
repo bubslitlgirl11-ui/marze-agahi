@@ -1,0 +1,27 @@
+<svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="favMinimal" x1="10" y1="25" x2="90" y2="75" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#1B4D4B" />
+      <stop offset="35%" stopColor="#245E5D" />
+      <stop offset="65%" stopColor="#E2BD7E" />
+      <stop offset="100%" stopColor="#A77D46" />
+    </linearGradient>
+  </defs>
+
+  <rect x="2" y="2" width="96" height="96" rx="24" fill="#245E5D" />
+  <path
+    d="M 50 50
+       C 42 38, 36 31, 28.5 31
+       C 18.8 31, 11 39.5, 11 50
+       C 11 60.5, 18.8 69, 28.5 69
+       C 36 69, 42 62, 50 50
+       C 58 38, 64 31, 71.5 31
+       C 81.2 31, 89 39.5, 89 50
+       C 89 60.5, 81.2 69, 71.5 69
+       C 64 69, 58 62, 50 50 Z"
+    stroke="#E2BD7E"
+    strokeWidth="8"
+    strokeLinecap="round"
+  />
+  <circle cx="50" cy="50" r="4.5" fill="#FFFFFF" />
+</svg>
