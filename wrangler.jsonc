@@ -18,9 +18,11 @@
     }
   ],
   "vars": {
+    "NODE_ENV": "production",
     "SITE_URL": "https://neadrdeath.ir",
     "DEFAULT_LOCALE": "fa",
     "EMAIL_PROVIDER": "none",
-    "ANALYTICS_ENABLED": "false"
+    "ANALYTICS_ENABLED": "false",
+    "PAYLOAD_SECRET": "marzeagahi_secure_payload_secret_32_chars_long_prod"
   }
 }

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "dev:cloudflare": "wrangler pages dev .open-next/assets",
-    "build": "next build",
+    "build": "opennextjs-cloudflare build",
+    "build:local": "next build",
     "start": "next start",
     "lint": "eslint . --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
